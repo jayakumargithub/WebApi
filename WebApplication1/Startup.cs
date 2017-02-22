@@ -7,7 +7,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Swashbuckle.AspNetCore.SwaggerGen;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using System.Xml.Serialization;
+
 
 namespace WebApplication1
 {
@@ -29,12 +33,21 @@ namespace WebApplication1
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc();
+            ILogger logger;
+            JsonSerializerSettings settings = new JsonSerializerSettings();
 
             services.AddLogging();
 
+            services.AddMvc().
+            AddJsonOptions(opts =>
+            {
+                // Force Camel Case to JSON
+                opts.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                opts.SerializerSettings.Formatting = Formatting.Indented;
+            });
+
             // Add our repository type
-         //   services.AddSingleton<ITodoRepository, TodoRepository>();
+            //   services.AddSingleton<ITodoRepository, TodoRepository>();
 
             // Register the Swagger generator, defining one or more Swagger documents
             services.AddSwaggerGen(c =>
@@ -53,6 +66,7 @@ namespace WebApplication1
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
+           
             // Enable middleware to serve swagger-ui (HTML, JS, CSS etc.), specifying the Swagger JSON endpoint.
             app.UseSwaggerUi(c =>
             {

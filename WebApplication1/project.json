@@ -1,4 +1,6 @@
 {
+  "title": "WebApiCore",
+  "description": "WebApiCore",
   "dependencies": {
     "Microsoft.AspNetCore.Mvc": "1.0.1",
     "Microsoft.AspNetCore.Routing": "1.0.1",

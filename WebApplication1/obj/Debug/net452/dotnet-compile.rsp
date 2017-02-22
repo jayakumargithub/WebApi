@@ -10,6 +10,8 @@
 --optimize:False
 --emit-entry-point:True
 --output-name:WebApplication1
+--title:WebApiCore
+--description:WebApiCore
 --file-version:1.0.0.0
 --version:1.0.0.0
 --informational-version:1.0.0

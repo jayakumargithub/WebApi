@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace WebApi
 {
@@ -11,6 +13,20 @@ namespace WebApi
         {
             // Web API configuration and services
 
+            var appXmlType = config.Formatters.XmlFormatter.SupportedMediaTypes.FirstOrDefault(t => t.MediaType == "application/xml");
+            config.Formatters.XmlFormatter.SupportedMediaTypes.Remove(appXmlType);
+
+            System.Net.Http.Formatting.JsonMediaTypeFormatter jsonFormatter = config.Formatters.JsonFormatter;
+            JsonSerializerSettings settings = new JsonSerializerSettings();
+            //Json indenting
+            settings.Formatting = Formatting.Indented;
+            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
+
+            //Note:  to avoid object reference preserved error
+            // jsonFormatter.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.All;
+
+            config.Formatters.JsonFormatter.SerializerSettings = settings;
             // Web API routes
             config.MapHttpAttributeRoutes();
 
