@@ -5,6 +5,9 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using WebApi.Models;
+using FluentValidation;
+using WebApi.ModelBinder;
+
 
 namespace WebApi.Controllers
 {
@@ -13,8 +16,8 @@ namespace WebApi.Controllers
 
         private static readonly List<Person> persons = new List<Person>()
         {
-            new Person {Name = "Jayakumar", Age=42, Brother = new Person {Name="Chandru", Age = 40 } },
-            new Person {Name="Pavan", Age=35, Brother = new Person {Name="Kiran", Age=25 } }
+            new Person {FirstName = "Jayakumar",LastName="Mogenahalli", Age=42, Brother = new Person {FirstName="Chandru", Age = 40 } },
+            new Person {FirstName="Pavan", LastName="Kumar", Age=35, Brother = new Person {FirstName="Kiran", Age=25 } }
         };
 
         public IEnumerable<Person> Get()
@@ -22,10 +25,25 @@ namespace WebApi.Controllers
             return persons;
         }
 
-        [HttpPost] 
-        public IHttpActionResult Post([FromBody]Person person)
+        [HttpPost]  
+        public IHttpActionResult Post( Person person)
         {
-            return Ok();
+           
+
+            if (!ModelState.IsValid)
+            {
+                // validation failed; throw HttpResponseException
+                //throw new HttpResponseException(
+                //    new HttpResponseMessage
+                //    {
+                //        StatusCode = HttpStatusCode.BadRequest,
+                //        ReasonPhrase = "Validation failed."
+                //    });
+
+                return BadRequest("Something went wrong");
+            }
+
+            return Ok("Everything went well");
         }
 
 

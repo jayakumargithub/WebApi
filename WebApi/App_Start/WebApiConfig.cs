@@ -5,6 +5,7 @@ using System.Web.Http;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using WebApi.ModelBinder;
+using FluentValidation.WebApi;
 
 namespace WebApi
 {
@@ -23,13 +24,20 @@ namespace WebApi
             settings.Formatting = Formatting.Indented;
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
-            config.Filters.Add(new ValidateModelAttribute());
+            //enable fluent api
+            //  FluentValidationModelValidatorProvider.Configure(config); 
+           
+
             //Note:  to avoid object reference preserved error
             // jsonFormatter.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.All;
 
+            config.MessageHandlers.Add(new ResponseWrappingHandler());
+            config.Filters.Add(new ValidateModelAttribute());
             config.Formatters.JsonFormatter.SerializerSettings = settings;
             // Web API routes
             config.MapHttpAttributeRoutes();
+
+
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
