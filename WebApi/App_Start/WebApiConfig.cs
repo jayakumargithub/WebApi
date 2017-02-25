@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Http;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
+using WebApi.ModelBinder;
 
 namespace WebApi
 {
@@ -18,11 +19,11 @@ namespace WebApi
 
             System.Net.Http.Formatting.JsonMediaTypeFormatter jsonFormatter = config.Formatters.JsonFormatter;
             JsonSerializerSettings settings = new JsonSerializerSettings();
-            //Json indenting
+            //Json indenting    
             settings.Formatting = Formatting.Indented;
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
-
+            config.Filters.Add(new ValidateModelAttribute());
             //Note:  to avoid object reference preserved error
             // jsonFormatter.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.All;
 

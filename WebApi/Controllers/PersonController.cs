@@ -22,6 +22,12 @@ namespace WebApi.Controllers
             return persons;
         }
 
+        [HttpPost] 
+        public IHttpActionResult Post([FromBody]Person person)
+        {
+            return Ok();
+        }
+
 
     }
 }
