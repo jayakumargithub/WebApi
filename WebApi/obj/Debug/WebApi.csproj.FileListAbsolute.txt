@@ -45,7 +45,6 @@ C:\Projects\WebApiPractice\WebApi\obj\Debug\WebApi.dll
 C:\Projects\WebApiPractice\WebApi\obj\Debug\WebApi.pdb
 C:\Projects\WebApiPractice\WebApi\bin\Swashbuckle.Core.dll
 C:\Projects\WebApiPractice\WebApi\bin\WebActivatorEx.dll
-C:\Projects\WebApiPractice\WebApi\obj\Debug\WebApi.csprojResolveAssemblyReference.cache
 C:\Projects\WebApiPractice\WebApi\bin\FluentValidation.dll
 C:\Projects\WebApiPractice\WebApi\bin\FluentValidation.pdb
 C:\Projects\WebApiPractice\WebApi\bin\FluentValidation.xml

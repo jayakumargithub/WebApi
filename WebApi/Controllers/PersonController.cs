@@ -31,16 +31,8 @@ namespace WebApi.Controllers
            
 
             if (!ModelState.IsValid)
-            {
-                // validation failed; throw HttpResponseException
-                //throw new HttpResponseException(
-                //    new HttpResponseMessage
-                //    {
-                //        StatusCode = HttpStatusCode.BadRequest,
-                //        ReasonPhrase = "Validation failed."
-                //    });
-
-                return BadRequest("Something went wrong");
+            {  
+                return BadRequest();
             }
 
             return Ok("Everything went well");

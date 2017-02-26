@@ -180,6 +180,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ModelBinder\ApiLogEntry.cs" />
+    <Compile Include="ModelBinder\ApiLogHandler.cs" />
     <Compile Include="ModelBinder\ColorTypeConverter.cs" />
     <Compile Include="ModelBinder\PersonValidator.cs" />
     <Compile Include="ModelBinder\ResponsePackage.cs" />
