@@ -62,7 +62,7 @@ namespace WebApi.ModelBinder
 
             return new ApiLogEntry
             {
-                Application = "[insert-calling-app-here]",
+                Application = "WebApi", // "[insert-calling-app-here]",
                 User = context.User.Identity.Name,
                 Machine = Environment.MachineName,
                 RequestContentType = context.Request.ContentType,

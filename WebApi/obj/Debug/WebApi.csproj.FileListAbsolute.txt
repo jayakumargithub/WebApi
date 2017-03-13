@@ -67,3 +67,4 @@ C:\Projects\WebApiPractice\WebApi\bin\tr\FluentValidation.resources.dll
 C:\Projects\WebApiPractice\WebApi\bin\zh-CN\FluentValidation.resources.dll
 C:\Projects\WebApiPractice\WebApi\bin\FluentValidation.WebApi.dll
 C:\Projects\WebApiPractice\WebApi\bin\FluentValidation.WebApi.pdb
+C:\Projects\WebApiPractice\WebApi\obj\Debug\WebApi.csprojResolveAssemblyReference.cache
