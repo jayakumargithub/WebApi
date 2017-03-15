@@ -31,7 +31,7 @@ namespace WebApi
             //Note:  to avoid object reference preserved error
             // jsonFormatter.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.All;
 
-            config.MessageHandlers.Add(new ResponseWrappingHandler());
+           // config.MessageHandlers.Add(new ResponseWrappingHandler());
             config.Filters.Add(new ValidateModelAttribute());
             config.Formatters.JsonFormatter.SerializerSettings = settings;
             // Web API routes

@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using FluentValidation.WebApi;
+using WebApi.ModelBinder;
 
 
 namespace WebApi
@@ -22,6 +23,7 @@ namespace WebApi
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             FluentValidationModelValidatorProvider.Configure(GlobalConfiguration.Configuration);
+            GlobalConfiguration.Configuration.MessageHandlers.Add(new ApiLogHandler());
         }
     }
 }

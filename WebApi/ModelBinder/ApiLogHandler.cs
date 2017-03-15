@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Routing;
+using Newtonsoft.Json.Linq;
 
 namespace WebApi.ModelBinder
 {
@@ -37,21 +38,29 @@ namespace WebApi.ModelBinder
                     var response = task.Result;
 
                     // Update the API log entry with response info
-                    apiLogEntry.ResponseStatusCode = (int)response.StatusCode;
+                    apiLogEntry.ResponseStatusCode = (int) response.StatusCode;
                     apiLogEntry.ResponseTimestamp = DateTime.Now;
 
                     if (response.Content != null)
                     {
-                        apiLogEntry.ResponseContentBody = response.Content.ReadAsStringAsync().Result;
+                        var byteResponse = response.Content.ReadAsByteArrayAsync().Result;
+                        apiLogEntry.ResponseContentBody = System.Text.Encoding.UTF8.GetString(byteResponse);  
                         apiLogEntry.ResponseContentType = response.Content.Headers.ContentType.MediaType;
                         apiLogEntry.ResponseHeaders = SerializeHeaders(response.Content.Headers);
                     }
 
-                    // TODO: Save the API log entry to the database
+                    var jsonData = JsonConvert.SerializeObject(apiLogEntry);
+                    var j =new  JObject(jsonData);
+                    var now = DateTime.Now;
+                    var path =
+                        $"{AppDomain.CurrentDomain.BaseDirectory}/{@"\log\" + now.Hour.ToString() + now.Minute.ToString() + now.Second.ToString() + now.Millisecond.ToString() + ".log"}";
+                  System.IO.File.WriteAllText(path,jsonData);
+                   
+                
 
                     return response;
                 }, cancellationToken);
-            // return base.SendAsync(request, cancellationToken);
+             // return base.SendAsync(request, cancellationToken);
         }
 
 
