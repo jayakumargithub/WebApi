@@ -23,7 +23,10 @@ namespace WebApi
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             FluentValidationModelValidatorProvider.Configure(GlobalConfiguration.Configuration);
-            GlobalConfiguration.Configuration.MessageHandlers.Add(new ApiLogHandler());
+            log4net.Config.XmlConfigurator.Configure();
+            // GlobalConfiguration.Configuration.MessageHandlers.Add(new ApiLogHandler());
+            // GlobalConfiguration.Configuration.MessageHandlers.Add(new ResponseWrappingHandler());
+
         }
     }
 }

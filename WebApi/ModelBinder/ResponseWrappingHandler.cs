@@ -7,13 +7,19 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Dispatcher;
 
 namespace WebApi.ModelBinder
 {
     public class ResponseWrappingHandler : DelegatingHandler
     {
+        public ResponseWrappingHandler(HttpConfiguration configuration)
+        {
+            InnerHandler = new HttpControllerDispatcher(configuration);
+        }
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
+           
             //Step 1: Wait for the Response
             var response = await base.SendAsync(request, cancellationToken);
 

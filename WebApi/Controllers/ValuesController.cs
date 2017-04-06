@@ -4,20 +4,27 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
+using System.Web.UI.WebControls;
 using WebApi.Models;
 
 namespace WebApi.Controllers
 {
+    [EnableCors("*", "*", "*")]
     public class ValuesController : ApiController
     {
         // GET api/values
         [ResponseType(typeof(Color))]
-        public IEnumerable<string> Get()
+        //[Authorize] 
+       
+        public string[] Get()
         {
+          //  return InternalServerError();
             return new string[] { "value1", "value2" };
         }
 
+        
         // GET api/values/5
         public string Get(int id)
         {

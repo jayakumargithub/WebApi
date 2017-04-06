@@ -49,14 +49,15 @@ namespace WebApi.ModelBinder
                         apiLogEntry.ResponseHeaders = SerializeHeaders(response.Content.Headers);
                     }
 
+
+
                     var jsonData = JsonConvert.SerializeObject(apiLogEntry);
-                    var j =new  JObject(jsonData);
                     var now = DateTime.Now;
                     var path =
                         $"{AppDomain.CurrentDomain.BaseDirectory}/{@"\log\" + now.Hour.ToString() + now.Minute.ToString() + now.Second.ToString() + now.Millisecond.ToString() + ".log"}";
-                  System.IO.File.WriteAllText(path,jsonData);
-                   
-                
+                    System.IO.File.WriteAllText(path, jsonData);
+
+
 
                     return response;
                 }, cancellationToken);

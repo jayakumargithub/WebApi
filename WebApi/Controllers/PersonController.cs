@@ -4,8 +4,10 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.ModelBinding;
 using WebApi.Models;
 using FluentValidation;
+using Newtonsoft.Json;
 using WebApi.ModelBinder;
 
 
@@ -16,8 +18,8 @@ namespace WebApi.Controllers
 
         private static readonly List<Person> persons = new List<Person>()
         {
-            new Person {FirstName = "Jayakumar",LastName="Mogenahalli", Age=42, Brother = new Person {FirstName="Chandru", Age = 40 } },
-            new Person {FirstName="Pavan", LastName="Kumar", Age=35, Brother = new Person {FirstName="Kiran", Age=25 } }
+            new Person {FirstName = "Jayakumar",LastName="Mogenahalli", Age=42 },
+            new Person {FirstName="Pavan", LastName="Kumar", Age=35 }
         };
 
         public IEnumerable<Person> Get()
@@ -26,7 +28,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]  
-        public IHttpActionResult Post( Person person)
+        public IHttpActionResult Post( [ModelBinder(typeof(PersonModelBinder))]Person person)
         {
            
 
@@ -34,8 +36,15 @@ namespace WebApi.Controllers
             {  
                 return BadRequest();
             }
+            var data = JsonConvert.SerializeObject(person);
+            return Ok(data);
+        }
 
-            return Ok("Everything went well");
+        [Route("HttpError")]
+        [HttpGet]
+        public HttpResponseMessage HttpError()
+        {
+            return Request.CreateResponse(HttpStatusCode.NotFound, "You cannot access this method at this time.");
         }
 
 

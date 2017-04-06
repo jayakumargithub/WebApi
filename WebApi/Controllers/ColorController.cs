@@ -20,7 +20,7 @@ namespace WebApi.Controllers
         /// </summary>
         /// <param name="color"></param>
         /// <returns></returns>
-        public IHttpActionResult Get(Color color)
+        public IHttpActionResult Get(string color)
         {
             if(color ==null)
             {
